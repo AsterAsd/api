@@ -8,6 +8,11 @@ app.use(bodyParser.json());
 
 let productos = [];
 
+// Redirección de la raíz a /productos
+app.get('/', (req, res) => {
+    res.redirect('/productos');
+});
+
 // Ruta para registrar un producto
 app.post('/productos', (req, res) => {
     const { nombre, precio, descripcion } = req.body;
