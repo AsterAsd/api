@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(cors()); // Habilitar CORS
 
 // Conexión a la base de datos MongoDB Atlas
 mongoose.connect(process.env.MONGODB_URI);
