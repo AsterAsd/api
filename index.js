@@ -30,7 +30,9 @@ app.post('/productos', async (req, res) => {
     const nuevoProducto = new Producto({ nombre, precio, descripcion });
     try {
         await nuevoProducto.save();
-        res.status(201).json(nuevoProducto);
+        const productoLimpio = nuevoProducto.toObject();
+        delete productoLimpio.__v;
+        res.status(201).json(productoLimpio);
     } catch (error) {
         res.status(500).json({ error: 'Error al registrar el producto' });
     }
@@ -39,7 +41,7 @@ app.post('/productos', async (req, res) => {
 // Ruta para consultar todos los productos
 app.get('/productos', async (req, res) => {
     try {
-        const productos = await Producto.find();
+        const productos = await Producto.find().select('-__v');
         res.json(productos);
     } catch (error) {
         res.status(500).json({ error: 'Error al consultar los productos' });
@@ -49,7 +51,7 @@ app.get('/productos', async (req, res) => {
 // Ruta para consultar un producto por ID
 app.get('/productos/:id', async (req, res) => {
     try {
-        const producto = await Producto.findById(req.params.id);
+        const producto = await Producto.findById(req.params.id).select('-__v');
         if (producto) {
             res.json(producto);
         } else {
