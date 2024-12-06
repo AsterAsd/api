@@ -31,7 +31,7 @@ app.post('/productos', async (req, res) => {
     try {
         await nuevoProducto.save();
         const productoLimpio = nuevoProducto.toObject();
-        delete productoLimpio.__v;
+        delete productoLimpio.__v;  // Eliminar el campo __v del objeto antes de devolverlo
         res.status(201).json(productoLimpio);
     } catch (error) {
         res.status(500).json({ error: 'Error al registrar el producto' });
@@ -41,7 +41,7 @@ app.post('/productos', async (req, res) => {
 // Ruta para consultar todos los productos
 app.get('/productos', async (req, res) => {
     try {
-        const productos = await Producto.find().select('-__v');
+        const productos = await Producto.find().select('-__v');  // Excluir el campo __v en la consulta
         res.json(productos);
     } catch (error) {
         res.status(500).json({ error: 'Error al consultar los productos' });
@@ -51,7 +51,7 @@ app.get('/productos', async (req, res) => {
 // Ruta para consultar un producto por ID
 app.get('/productos/:id', async (req, res) => {
     try {
-        const producto = await Producto.findById(req.params.id).select('-__v');
+        const producto = await Producto.findById(req.params.id).select('-__v');  // Excluir el campo __v en la consulta
         if (producto) {
             res.json(producto);
         } else {
