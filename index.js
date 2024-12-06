@@ -9,7 +9,7 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Conexión a la base de datos MongoDB Atlas
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI);
 
 const productoSchema = new mongoose.Schema({
     nombre: String,
