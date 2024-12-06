@@ -2,13 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "/index.js",
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(.*)", 
-    "dest": "/index.js" }
+    { "src": "/(.*)", "dest": "index.js" }
   ],
-  "env": { "MONGODB_URI": "@mongodb_uri"}
+  "env": {
+    "MONGODB_URI": "mongodb+srv://son:lRu4KyFWDd0uv7v4@pruebas.nu9wu.mongodb.net/Reactivas?retryWrites=true&w=majority&appName=Pruebas"
+  }
 }
